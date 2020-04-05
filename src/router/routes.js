@@ -1,13 +1,12 @@
-import { Route, Redirect } from 'react-router-dom';
+import React from 'react';
+import { Route } from 'react-router-dom';
 
 const PublicRoute = ({ component: Component,location, ...rest }) => {
   return (
     <Route
       {...rest}
       render={matchProps => (
-        <PublicLayout> //TODO :: create public layout
           <Component {...matchProps} />
-        </PublicLayout>
       )}
     />
   );
