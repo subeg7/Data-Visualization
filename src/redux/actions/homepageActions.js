@@ -26,8 +26,8 @@ export const getHomePageData = () => async dispatch => {
     } catch (error) {
         dispatch({
             type: GET_HOMEPAGE_FAILURE,
-            payload: res.data,
+            payload: error,
         });
     }
-    
+
 }

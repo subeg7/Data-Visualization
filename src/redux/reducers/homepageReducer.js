@@ -13,7 +13,7 @@ const initialState = {
 };
 
 
-const homepageReducer = (state = initialState, action){
+const homepageReducer = (state = initialState, action)=>{
     switch (action.type) {
         case GET_HOMEPAGE_START:
             return {
@@ -32,5 +32,10 @@ const homepageReducer = (state = initialState, action){
                 ...state,
                 isLoading: false
             }
+        default:
+            console.log(action.type + " not matched in reducer");
+            return state;
     }
 }
+
+export default homepageReducer;
