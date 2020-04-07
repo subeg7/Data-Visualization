@@ -1,5 +1,5 @@
 import { api } from '../../services/api';
-import { dataUrl } from '../../services/apiLink';
+import { dataUrl,statsUrl } from '../../services/apiLink';
 import store from '../store';
 
 import {
@@ -17,7 +17,7 @@ export const getHomePageData = () => async dispatch => {
         dispatch({
             type: GET_HOMEPAGE_START,
         });
-        const res = await api.get(dataUrl);
+        const res = await api.get(statsUrl);
         dispatch({
             type: GET_HOMEPAGE_SUCCESS,
             payload: res.data,

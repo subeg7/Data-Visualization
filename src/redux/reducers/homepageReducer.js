@@ -6,10 +6,7 @@ import {
 
 const initialState = {
     isLoading: false,
-    country: [],
-    total: [],
-    lastHour: [],
-    today: [],
+    totalGlobalStats : null,
 };
 
 
@@ -18,13 +15,14 @@ const homepageReducer = (state = initialState, action)=>{
         case GET_HOMEPAGE_START:
             return {
                 ...state,
-                isLoading: true
+                isLoading: true,
             }
 
         case GET_HOMEPAGE_SUCCESS:
             return {
                 ...state,
-                isLoading: false
+                isLoading: false,
+                totalGlobalStats : action.payload,
             }
 
         case GET_HOMEPAGE_FAILURE:

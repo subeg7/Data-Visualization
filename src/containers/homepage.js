@@ -4,22 +4,27 @@ import { connect } from 'react-redux';
 
 const mapStateToProps = state => {
   return {
-    isHomepageApiLoading : state.homepage.isLoading,
+    isHomepageApiLoading: state.homepage.isLoading,
+    totalGlobalStats : state.homepage.totalGlobalStats,
   }
 }
 const Homepage = props => {
-    const[totalCount, increaseTotalCount] = useState(0);
+  // const[totalCount, increaseTotalCount] = useState(0);
 
-    useEffect(()=>{
-      props.getHomePageData();
-    }); 
+  useEffect(() => {
+    if(props.totalGlobalStats === null)
+        props.getHomePageData();
+  });
 
-    return(
-      <div>
-          <p>TODO :: Home page </p>
-          <h1> Api is currently : {props.isHomepageApiLoading?"Loading" : "Successfully loaded"}</h1>
-      </div>
-    );
+  return (
+    <div>
+      <p>TODO :: Home page </p>
+      <h1> Api is currently : {props.isHomepageApiLoading ? "Loading" : "Successfully loaded"}</h1>
+      {props.isHomepageApiLoading ? null :
+        JSON.stringify(props.totalGlobalStats)
+      }
+    </div>
+  );
 }
 
 export default connect(
