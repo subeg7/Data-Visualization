@@ -16,7 +16,7 @@ function PublicRouter() {
         <Switch>
           <PublicRoute exact path="/" component={Homepage} />{' '}
           <PublicRoute exact path="/data" component={Datapage} />{' '}
-          <PublicRoute exact path="/bar" component={BarChart} />{' '}
+          <PublicRoute exact path="/barchart" component={BarChart} />{' '}
         </Switch>{' '}
       </Router>{' '}
     </>
