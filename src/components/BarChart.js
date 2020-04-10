@@ -2,12 +2,26 @@ import React, { useEffect, useRef } from "react";
 import * as d3 from 'd3';
 import { svg } from "d3";
 
+import { connect } from 'react-redux';
+
+const mapStateToProps = state => {
+    return {
+        isHomepageApiLoading: state.homepage.isLoading,
+        totalGlobalStats: state.homepage.totalGlobalStats,
+        allCountriesData: state.homepage.allCountriesData,
+    }
+}
+
+
 const BarChart = props => {
     const canvasRef = useRef(null);
 
     useEffect(() => {
         const data = [3, 5, 1, 7, 2];
-        drawBarChart(data);
+
+        // if (!props.isHomepageApiLoading) {
+            drawBarChart(data);
+        // }
     });
 
     const drawBarChart = (data) => {
@@ -44,7 +58,12 @@ const BarChart = props => {
 
 
 
-    return (<div ref={canvasRef}><h1>BarChart</h1></div>);
+    return (<div ref={canvasRef}><h1>Country :{JSON.stringify(props.totalGlobalStats)} </h1></div>);
 }
 
-export default BarChart;
+
+export default connect(
+    mapStateToProps,
+    null
+)(BarChart);
+
