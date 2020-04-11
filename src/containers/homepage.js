@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { getHomePageData } from '../redux/actions/homepageActions';
 import { connect } from 'react-redux';
+import BarChart from '../components/BarChart';
 
 const mapStateToProps = state => {
   return {
@@ -20,8 +21,8 @@ const Homepage = props => {
     <div>
       <p>TODO :: Home page </p>
       <h1> Api is currently : {props.isHomepageApiLoading ? "Loading" : "Successfully loaded"}</h1>
-      {props.isHomepageApiLoading ? null :
-        JSON.stringify(props.totalGlobalStats)
+      {
+        props.isHomepageApiLoading ? null : <BarChart data={[1,2,3,4,5,6,7,8,9]} country={"Nepal"}/>
       }
     </div>
   );

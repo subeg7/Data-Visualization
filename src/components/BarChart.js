@@ -15,14 +15,9 @@ const mapStateToProps = state => {
 
 const BarChart = props => {
     const canvasRef = useRef(null);
-
     useEffect(() => {
-        const data = [3, 5, 1, 7, 2];
-
-        // if (!props.isHomepageApiLoading) {
-            drawBarChart(data);
-        // }
-    });
+        drawBarChart(props.data);
+    }, []);
 
     const drawBarChart = (data) => {
         // canvasRef.current.style = 'background-color: yellow;';
@@ -55,10 +50,7 @@ const BarChart = props => {
             .attr("y", (dataPoint, i) => canvasHeight - dataPoint * scale - 10)
             .text(dataPoint => dataPoint)
     };
-
-
-
-    return (<div ref={canvasRef}><h1>Country :{JSON.stringify(props.totalGlobalStats)} </h1></div>);
+    return (<div ref={canvasRef}><h1>Country :{props.country} </h1></div>);
 }
 
 
