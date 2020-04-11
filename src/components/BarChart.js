@@ -16,7 +16,7 @@ const mapStateToProps = state => {
 const BarChart = props => {
     const canvasRef = useRef(null);
     useEffect(() => {
-        drawBarChart(props.data);
+        drawBarChart(props.countryData);
     }, []);
 
     const drawBarChart = (data) => {
