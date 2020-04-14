@@ -9,5 +9,3 @@ export const api = axios.create({
     },
     crossDomain: true,
   });
-
-  //TODO :: use request & response interceptors

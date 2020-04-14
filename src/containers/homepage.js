@@ -1,31 +1,54 @@
 import React, { useState, useEffect } from 'react';
 import { getHomePageData } from '../redux/actions/homepageActions';
 import { connect } from 'react-redux';
+import BarChart from '../components/BarChart';
 
 const mapStateToProps = state => {
   return {
-    isHomepageApiLoading: state.homepage.isLoading,
-    totalGlobalStats : state.homepage.totalGlobalStats,
+    isLoading: state.homepage.isLoading,
+    isSuccessful: state.homepage.isSuccessful,
+    totalGlobalStats: state.homepage.allCountriesData,
   }
 }
 const Homepage = props => {
-  // const[totalCount, increaseTotalCount] = useState(0);
 
   useEffect(() => {
-    if(props.totalGlobalStats === null)
-        props.getHomePageData();
+    if (props.totalGlobalStats === null)
+      props.getHomePageData();
   });
+
+  const getDataByCountry = (countryName) => {
+    try {
+      var filteredCountry = null;
+      props.totalGlobalStats.forEach(element => {
+        if (element.country == countryName) {
+          filteredCountry = element;
+          return true;
+        }
+      });
+      return filteredCountry;
+    } catch (e) {
+      return null;
+    }
+  };
+
 
   return (
     <div>
-      <p>TODO :: Home page </p>
-      <h1> Api is currently : {props.isHomepageApiLoading ? "Loading" : "Successfully loaded"}</h1>
-      {props.isHomepageApiLoading ? null :
-        JSON.stringify(props.totalGlobalStats)
+      <h1>{props.isLoading ? "Please wait" : null}</h1>
+      <h1>{props.isSuccessful ? "Covid-2019 Data by country" : null}</h1>
+      {
+      }{
+        props.isSuccessful ? <BarChart countryData={getDataByCountry("Nepal")} /> : null
+      }{
+      }{
+        props.isSuccessful ? <BarChart countryData={getDataByCountry("Bhutan")} /> : null
       }
     </div>
   );
 }
+
+
 
 export default connect(
   mapStateToProps,
