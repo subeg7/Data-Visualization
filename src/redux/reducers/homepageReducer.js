@@ -6,6 +6,7 @@ import {
 
 const initialState = {
     isLoading: false,
+    isSuccessful: false,
     totalGlobalStats : null,
     allCountriesData : null,
 };
@@ -17,12 +18,14 @@ const homepageReducer = (state = initialState, action)=>{
             return {
                 ...state,
                 isLoading: true,
+                isSuccessful : false,
             }
 
         case GET_HOMEPAGE_SUCCESS:
             return {
                 ...state,
                 isLoading: false,
+                isSuccessful : true,
                 totalGlobalStats : action.payload, //TODO :: set only one key per action type 
                 allCountriesData : action.payload,//TODO :: set only one key per action type 
             }

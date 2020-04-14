@@ -4,27 +4,19 @@ import { svg } from "d3";
 
 import { connect } from 'react-redux';
 
-const mapStateToProps = state => {
-    return {
-        isHomepageApiLoading: state.homepage.isLoading,
-        totalGlobalStats: state.homepage.totalGlobalStats,
-        allCountriesData: state.homepage.allCountriesData,
-    }
-}
-
-
 const BarChart = props => {
+
     const canvasRef = useRef(null);
-    useEffect(() => {   
-        const formattedData = [props.countryData.cases,props.countryData.deaths,props.countryData.recovered];
-        // const formattedData = [7,4,1,2,4];
-        drawBarChart(formattedData);
+    useEffect(() => {
+        try {
+            const formattedData = [props.countryData.cases, props.countryData.deaths, props.countryData.recovered];
+            drawBarChart(formattedData);
+        } catch (e) {
+            
+        }
     }, []);
 
     const drawBarChart = (data) => {
-        // canvasRef.current.style = 'background-color: yellow;';
-        console.log("drawing bar chart");
-
         const canvasHeight = 400;
         const canvasWidth = 600;
         const scale = 20;
@@ -38,8 +30,8 @@ const BarChart = props => {
         svgCanvas.selectAll("rect")
             .data(data).enter()
             .append("rect")
-            .attr("width", 40)
-            .attr("height", (datapoint) => datapoint * 20)
+            .attr("width", 50)
+            .attr("height", (datapoint) => datapoint)
             .attr("fill", "orange")
             .attr("x", (datapoint, iteration) => iteration * 45)
             .attr("y", (datapoint) => canvasHeight - datapoint * scale)
@@ -55,9 +47,8 @@ const BarChart = props => {
     return (<div ref={canvasRef}><h1>Country :{props.countryData.country} </h1></div>);
 }
 
-
 export default connect(
-    mapStateToProps,
+    null,
     null
 )(BarChart);
 

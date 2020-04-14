@@ -5,12 +5,12 @@ import BarChart from '../components/BarChart';
 
 const mapStateToProps = state => {
   return {
-    isHomepageApiLoading: state.homepage.isLoading,
+    isLoading: state.homepage.isLoading,
+    isSuccessful : state.homepage.isSuccessful,
     totalGlobalStats: state.homepage.allCountriesData,
   }
 }
 const Homepage = props => {
-  // const[totalCount, increaseTotalCount] = useState(0);
 
   useEffect(() => {
     if (props.totalGlobalStats === null)
@@ -18,20 +18,17 @@ const Homepage = props => {
   });
 
   const getDataByCountry = (countryName) => {
-    if (props.totalGlobalStats) {
+    try {
       var filteredCountry = null;
       props.totalGlobalStats.forEach(element => {
-        if (element.country === countryName) {
+        if (element.country == countryName) {
           filteredCountry = element;
+          return true;
         }
       });
-      if (filteredCountry) {
-        return [filteredCountry.cases,filteredCountry.deaths,filteredCountry.recovered];
-      } else {
-        return [0, 0, 1, 0, 1]; //TODO :: handle country not found
-      }
-    } else {
-      return [1, 2, 3, 4, 5, 6, 7, 8, 9];
+      return filteredCountry;
+    } catch(e){
+      return null;
     }
   };
 
@@ -39,9 +36,9 @@ const Homepage = props => {
   return (
     <div>
       <p>TODO :: Home page </p>
-      <h1> Api is currently : {props.isHomepageApiLoading ? "Loading" : "Successfully loaded"}</h1>
+      <h1> Api is currently : {props.isLoading ? "Loading" : "Successfully loaded"}</h1>
       {
-        props.isHomepageApiLoading ? null : <BarChart countryData={getDataByCountry("Nepal")}  />
+        props.isSuccessful ? <BarChart countryData={getDataByCountry("Germany")}/> : null
       }
     </div>
   );
