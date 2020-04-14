@@ -15,8 +15,10 @@ const mapStateToProps = state => {
 
 const BarChart = props => {
     const canvasRef = useRef(null);
-    useEffect(() => {
-        drawBarChart(props.countryData);
+    useEffect(() => {   
+        const formattedData = [props.countryData.cases,props.countryData.deaths,props.countryData.recovered];
+        // const formattedData = [7,4,1,2,4];
+        drawBarChart(formattedData);
     }, []);
 
     const drawBarChart = (data) => {
@@ -50,7 +52,7 @@ const BarChart = props => {
             .attr("y", (dataPoint, i) => canvasHeight - dataPoint * scale - 10)
             .text(dataPoint => dataPoint)
     };
-    return (<div ref={canvasRef}><h1>Country :{props.country} </h1></div>);
+    return (<div ref={canvasRef}><h1>Country :{props.countryData.country} </h1></div>);
 }
 
 
