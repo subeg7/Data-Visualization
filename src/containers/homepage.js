@@ -35,10 +35,8 @@ const Homepage = props => {
 
   return (
     <div>
-      <p>TODO :: Home page </p>
-      <h1> Api is currently : {props.isLoading ? "Loading" : "Successfully loaded"}</h1>
-      {
-      }
+      <h1>{props.isLoading ? "Please wait" : null}</h1>
+      <h1>{props.isSuccessful ? "Covid-2019 Data by country" : null}</h1>
       {
       }{
         props.isSuccessful ? <BarChart countryData={getDataByCountry("Nepal")} /> : null
