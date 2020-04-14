@@ -31,7 +31,7 @@ const BarChart = props => {
             .data(data).enter()
             .append("rect")
             .attr("width", 50)
-            .attr("height", (datapoint) => datapoint)
+            .attr("height", (datapoint) => datapoint * 20)
             .attr("fill", "orange")
             .attr("x", (datapoint, iteration) => iteration * 45)
             .attr("y", (datapoint) => canvasHeight - datapoint * scale)
@@ -44,7 +44,7 @@ const BarChart = props => {
             .attr("y", (dataPoint, i) => canvasHeight - dataPoint * scale - 10)
             .text(dataPoint => dataPoint)
     };
-    return (<div ref={canvasRef}><h1>Country :{props.countryData.country} </h1></div>);
+    return (<div key={props.countryData.country} ref={canvasRef}><h1>Country :{props.countryData.country} </h1></div>);
 }
 
 export default connect(

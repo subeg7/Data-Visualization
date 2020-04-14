@@ -6,7 +6,7 @@ import BarChart from '../components/BarChart';
 const mapStateToProps = state => {
   return {
     isLoading: state.homepage.isLoading,
-    isSuccessful : state.homepage.isSuccessful,
+    isSuccessful: state.homepage.isSuccessful,
     totalGlobalStats: state.homepage.allCountriesData,
   }
 }
@@ -27,7 +27,7 @@ const Homepage = props => {
         }
       });
       return filteredCountry;
-    } catch(e){
+    } catch (e) {
       return null;
     }
   };
@@ -38,7 +38,13 @@ const Homepage = props => {
       <p>TODO :: Home page </p>
       <h1> Api is currently : {props.isLoading ? "Loading" : "Successfully loaded"}</h1>
       {
-        props.isSuccessful ? <BarChart countryData={getDataByCountry("Germany")}/> : null
+      }
+      {
+      }{
+        props.isSuccessful ? <BarChart countryData={getDataByCountry("Nepal")} /> : null
+      }{
+      }{
+        props.isSuccessful ? <BarChart countryData={getDataByCountry("Bhutan")} /> : null
       }
     </div>
   );
