@@ -13,11 +13,7 @@ function PublicRouter() {
   return (
     <>
       <Router history={history}>
-        <Switch>
-          <PublicRoute exact path="/" component={Homepage} />{' '}
-          <PublicRoute exact path="/data" component={Datapage} />{' '}
-          <PublicRoute exact path="/barchart" component={BarChart} />{' '}
-        </Switch>{' '}
+          <PublicRoute exact path="/:country" component={Homepage} />{' '}
       </Router>{' '}
     </>
   );
