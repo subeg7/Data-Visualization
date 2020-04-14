@@ -49,10 +49,13 @@ const BarChart = props => {
             .text(dataPoint => dataPoint.key)
     };
     return (
-        <div>
-            <div key={props.countryData.country} ref={canvasRef}>
+        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+            <div key={props.countryData.country} >
                 <h1>{props.countryData.country} </h1>
-                <p>Last updated : {  moment(props.countryData.updated).fromNow()}</p>
+                <p>Last updated : {moment(props.countryData.updated).fromNow()}</p>
+                <div ref={canvasRef} >
+                {/* canvas is displayed here */}
+                </div>
             </div>
         </div>
 
