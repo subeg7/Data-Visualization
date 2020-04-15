@@ -22,16 +22,16 @@ const BarChart = props => {
 
     const drawBarChart = (data) => {
         const canvasHeight = 300;
-        const canvasWidth = 300;
-        const maxHeight = 300;
+        const canvasWidth = 150;
+        const maxHeight = 250;
+        const padding = 20;
         const scale = maxHeight / props.countryData.cases;
 
         const svgCanvas = d3.select(canvasRef.current)
             .append("svg")
             .attr("height", canvasHeight)
             .attr("width", canvasWidth)
-            .style("border", "1px solid red")
-            .style("padding", "40px");
+            // .style("border", "1px solid red")
 
         svgCanvas.selectAll("rect")
             .data(data).enter()
@@ -40,18 +40,23 @@ const BarChart = props => {
             .attr("height", (datapoint) => datapoint.value * scale)
             .attr("fill", (datapoint) => datapoint.color)
             .attr("x", (datapoint, iteration) => iteration * 45)
-            .attr("y", (datapoint) => canvasHeight - datapoint.value * scale);
+            .attr("y", (datapoint) => maxHeight - datapoint.value * scale);
+
+        svgCanvas.selectAll("text")
+            .data(data).enter()
+            .append("text")
+            .attr("y", maxHeight + 20)
+            .attr("x", 46)
+            .text(props.countryData.country)
 
     };
     return (
-        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-            <div key={props.countryData.country} >
+        <div className='row'>
+            {/* <div key={props.countryData.country} >
                 <h1>{props.countryData.country} </h1>
-                <p>Last updated : {moment(props.countryData.updated).fromNow()}</p>
-                <div ref={canvasRef} >
-                    {/* canvas is displayed here */}
-                </div>
-            </div>
+                <p>Last updated : {moment(props.countryData.updated).fromNow()}</p> */}
+                <div className='row' ref={canvasRef} ></div>
+            {/* </div> */}
         </div>
 
     );
