@@ -12,40 +12,49 @@ const mapStateToProps = state => {
 }
 const Homepage = props => {
   const [countryData, setCountryData] = useState(null);
-  const [isCountryFiltered, setFilteringStatus] = useState(false);
 
   useEffect(() => {
     if (props.allCountriesData === null)
       props.getHomePageData();
-    if (!isCountryFiltered)
-      getDataByCountry(props.match.params.country);
-
   });
 
   const getDataByCountry = (countryName) => {
+    var _countryData = null;
     try {
       props.allCountriesData.forEach(element => {
         if (element.country === countryName) {
-          setFilteringStatus(true);
-          setCountryData(element);
+          _countryData =  element;
         }
       });
+      return _countryData;
     } catch (e) {
-      setFilteringStatus(true);
-      setCountryData(null);
+      return null;
     }
   };
 
+  const showCountry = (countryName) => {
+    const countryData = getDataByCountry(countryName);
+    if (countryData) {
+      return (
+        <div>
+          <h1>{"Covid-2019 Data of " + countryName}</h1>
+          <BarChart countryData={countryData} />;
+        </div>
+      )
+    } else {
+      return ("Sorry, so called " + countryName + " country is not in earth. Search in your own planet");
+    }
+  }
 
   return (
     <div>
       <h1>{props.isLoading ? "Please wait" : null}</h1>
-      <h1>{props.isSuccessful ? "Covid-2019 Data of " + props.match.params.country : null}</h1>
       {
-        countryData? <BarChart countryData={countryData} /> : ("Sorry, so called " + props.match.params.country + " country is not in earth. Search in your own planet")
+        props.isSuccessful  ? showCountry(props.match.params.country ?? "Nepal") : null
       }
     </div>
   );
+
 }
 
 
