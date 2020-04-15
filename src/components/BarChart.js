@@ -10,9 +10,9 @@ const BarChart = props => {
     useEffect(() => {
         try {
             const formattedData = [
-                { key: "Cases", value: props.countryData.cases },
-                { key: "Deaths", value: props.countryData.deaths },
-                { key: "Recovered", value: props.countryData.recovered }
+                { key: "Deaths", value: props.countryData.deaths, color: "red" },
+                { key: "Cases", value: props.countryData.cases, color: "orange" },
+                { key: "Recovered", value: props.countryData.recovered, color: "green" }
             ];
             drawBarChart(formattedData);
         } catch (e) {
@@ -23,7 +23,8 @@ const BarChart = props => {
     const drawBarChart = (data) => {
         const canvasHeight = 300;
         const canvasWidth = 300;
-        const scale = 20;
+        const maxHeight = 300;
+        const scale = maxHeight / props.countryData.cases;
 
         const svgCanvas = d3.select(canvasRef.current)
             .append("svg")
@@ -35,18 +36,12 @@ const BarChart = props => {
         svgCanvas.selectAll("rect")
             .data(data).enter()
             .append("rect")
-            .attr("width", 50)
-            .attr("height", (datapoint) => datapoint.value * 20)
-            .attr("fill", "orange")
+            .attr("width", 40)
+            .attr("height", (datapoint) => datapoint.value * scale)
+            .attr("fill", (datapoint) => datapoint.color)
             .attr("x", (datapoint, iteration) => iteration * 45)
             .attr("y", (datapoint) => canvasHeight - datapoint.value * scale);
 
-        svgCanvas.selectAll("text")
-            .data(data).enter()
-            .append("text")
-            .attr("x", (dataPoint, i) => i * 45 + 10)
-            .attr("y", (dataPoint, i) => canvasHeight - dataPoint.value * scale - 10)
-            .text(dataPoint => dataPoint.key)
     };
     return (
         <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
@@ -54,7 +49,7 @@ const BarChart = props => {
                 <h1>{props.countryData.country} </h1>
                 <p>Last updated : {moment(props.countryData.updated).fromNow()}</p>
                 <div ref={canvasRef} >
-                {/* canvas is displayed here */}
+                    {/* canvas is displayed here */}
                 </div>
             </div>
         </div>
