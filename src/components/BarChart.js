@@ -24,6 +24,7 @@ const BarChart = props => {
         const canvasHeight = 300;
         const canvasWidth = 150;
         const maxHeight = 250;
+        const barWidth = 40;
         const padding = 20;
         const scale = maxHeight / props.countryData.cases;
 
@@ -36,7 +37,7 @@ const BarChart = props => {
         svgCanvas.selectAll("rect")
             .data(data).enter()
             .append("rect")
-            .attr("width", 40)
+            .attr("width", barWidth)
             .attr("height", (datapoint) => datapoint.value * scale)
             .attr("fill", (datapoint) => datapoint.color)
             .attr("x", (datapoint, iteration) => iteration * 45)
@@ -46,7 +47,7 @@ const BarChart = props => {
             .data(data).enter()
             .append("text")
             .attr("y", maxHeight + 20)
-            .attr("x", 46)
+            .attr("x", barWidth+10)
             .text(props.countryData.country)
 
     };

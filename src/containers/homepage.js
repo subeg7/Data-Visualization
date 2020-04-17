@@ -20,6 +20,11 @@ const Homepage = props => {
       props.getHomePageData();
   });
 
+  var prevMax = 0;
+  const getMaxRecord=()=>{
+
+  }
+
   const getDataByCountry = (countryName) => {
     var _countryData = null;
     try {
@@ -41,7 +46,7 @@ const Homepage = props => {
         <div>
           <h1>{"Corona-Virus 2019 Country Comparison with Live Data"}</h1>
           <div className='rows'>
-            <BarChart countryData={countryData} />
+            <BarChart countryData={countryData} scale={{}}/>
             <BarChart countryData={getDataByCountry("China")} />
             <BarChart countryData={getDataByCountry("India")} />
             <BarChart countryData={getDataByCountry("USA")} />
