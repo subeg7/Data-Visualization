@@ -1,39 +1,39 @@
 import {
-    GET_HOMEPAGE_START,
-    GET_HOMEPAGE_SUCCESS,
-    GET_HOMEPAGE_FAILURE,
+    GET_COUNTRIES_DATA_START,
+    GET_COUNTRIES_DATA_SUCCESS,
+    GET_COUNTRIES_DATA_FAILURE,
 } from "../types"
 
 const initialState = {
     isLoading: false,
     isSuccessful: false,
-    totalGlobalStats : null,
-    allCountriesData : null,
+    data: [],
 };
 
 
-const homepageReducer = (state = initialState, action)=>{
+const homepageReducer = (state = initialState, action) => {
     switch (action.type) {
-        case GET_HOMEPAGE_START:
+        case GET_COUNTRIES_DATA_START:
             return {
                 ...state,
                 isLoading: true,
-                isSuccessful : false,
+                isSuccessful: false,
             }
 
-        case GET_HOMEPAGE_SUCCESS:
+        case GET_COUNTRIES_DATA_SUCCESS:
             return {
                 ...state,
                 isLoading: false,
-                isSuccessful : true,
-                totalGlobalStats : action.payload, //TODO :: set only one key per action type 
-                allCountriesData : action.payload,//TODO :: set only one key per action type 
+                isSuccessful: true,
+                data: Array.isArray(action.payload) ? action.payload : [action.payload],
             }
 
-        case GET_HOMEPAGE_FAILURE:
+        case GET_COUNTRIES_DATA_FAILURE:
             return {
                 ...state,
-                isLoading: false
+                isLoading: false,
+                isSuccessful: false,
+                data: null,
             }
         default:
             console.log(action.type + " not matched in reducer");
