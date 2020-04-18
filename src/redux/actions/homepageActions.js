@@ -9,8 +9,6 @@ import {
 } from "../types";
 
 export const getHomePageData = (countryQuery) => async dispatch => {
-    // const countryQuery = countries //; //TODO :: implode countries into comma concatenation
-
     try {
         const loading = store.getState().homepage.isLoading;
         if (loading) {

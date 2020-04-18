@@ -3,6 +3,7 @@ import { getHomePageData } from '../redux/actions/homepageActions';
 import { connect } from 'react-redux';
 import BarChart from '../components/BarChart';
 import styles from '../App.css';
+import HorizontalScroll from 'react-scroll-horizontal'
 
 
 const mapStateToProps = state => {
@@ -15,20 +16,22 @@ const mapStateToProps = state => {
 const Homepage = props => {
 
   useEffect(() => {
-      props.getHomePageData(props.match.params.countries ?? "Nepal");
-  },[]);
+    props.getHomePageData(props.match.params.countries ?? "Nepal");
+  }, []);
 
   const showCountries = () => {
     if (props.countriesData) {
       return (
         <div>
           <h1>{"Corona-Virus 2019 Live Comparisons"}</h1>
-          <div className='rows'>
-            {
-              props.countriesData.map(country => {
-                return <BarChart countryData={country} />
-              })
-            }
+          <div style={{height:400,width:600,"border-width":5,"border":"solid","padding-top":40}}>
+            <HorizontalScroll>
+              {
+                props.countriesData.map(country => {
+                  return <BarChart countryData={country} />
+                })
+              }
+            </HorizontalScroll>
           </div>
         </div>
       )

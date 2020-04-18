@@ -32,7 +32,7 @@ const BarChart = props => {
             .append("svg")
             .attr("height", canvasHeight)
             .attr("width", canvasWidth)
-            // .style("border", "1px solid red")
+        // .style("border", "1px solid red")
 
         svgCanvas.selectAll("rect")
             .data(data).enter()
@@ -47,19 +47,12 @@ const BarChart = props => {
             .data(data).enter()
             .append("text")
             .attr("y", maxHeight + 20)
-            .attr("x", barWidth+10)
+            .attr("x", barWidth + 10)
             .text(props.countryData.country)
 
     };
     return (
-        <div className='row'>
-            {/* <div key={props.countryData.country} >
-                <h1>{props.countryData.country} </h1>
-                <p>Last updated : {moment(props.countryData.updated).fromNow()}</p> */}
-                <div className='row' ref={canvasRef} ></div>
-            {/* </div> */}
-        </div>
-
+        <div ref={canvasRef} ></div>
     );
 }
 
