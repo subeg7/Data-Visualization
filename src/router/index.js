@@ -14,7 +14,7 @@ function PublicRouter() {
     <>
       <Router history={history}>
         <PublicRoute exact path="/" component={Homepage} />{' '}
-        <PublicRoute exact path="/:country" component={Homepage} />{' '}
+        <PublicRoute exact path="/:countries" component={Homepage} />{' '}
       </Router>{' '}
     </>
   );

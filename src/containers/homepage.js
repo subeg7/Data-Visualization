@@ -9,57 +9,31 @@ const mapStateToProps = state => {
   return {
     isLoading: state.homepage.isLoading,
     isSuccessful: state.homepage.isSuccessful,
-    allCountriesData: state.homepage.allCountriesData,
+    countriesData: state.homepage.data,
   }
 }
 const Homepage = props => {
-  const [countryData, setCountryData] = useState(null);
 
   useEffect(() => {
-    if (props.allCountriesData === null)
-      props.getHomePageData();
-  });
+      props.getHomePageData(props.match.params.countries ?? "Nepal");
+  },[]);
 
-  var prevMax = 0;
-  const getMaxRecord=()=>{
-
-  }
-
-  const getDataByCountry = (countryName) => {
-    var _countryData = null;
-    try {
-      props.allCountriesData.forEach(element => {
-        if (element.country === countryName) {
-          _countryData = element;
-        }
-      });
-      return _countryData;
-    } catch (e) {
-      return null;
-    }
-  };
-
-  const showCountry = (countryName) => {
-    const countryData = getDataByCountry(countryName);
-    if (countryData) {
+  const showCountries = () => {
+    if (props.countriesData) {
       return (
         <div>
-          <h1>{"Corona-Virus 2019 Country Comparison with Live Data"}</h1>
+          <h1>{"Corona-Virus 2019 Live Comparisons"}</h1>
           <div className='rows'>
-            <BarChart countryData={countryData} scale={{}}/>
-            <BarChart countryData={getDataByCountry("China")} />
-            <BarChart countryData={getDataByCountry("India")} />
-            <BarChart countryData={getDataByCountry("USA")} />
-            <BarChart countryData={getDataByCountry("Iran")} />
-            <BarChart countryData={getDataByCountry("Bangladesh")} />
-            <BarChart countryData={getDataByCountry("Germany")} />
-            <BarChart countryData={getDataByCountry("France")} />
-            <BarChart countryData={getDataByCountry("Italy")} />
+            {
+              props.countriesData.map(country => {
+                return <BarChart countryData={country} />
+              })
+            }
           </div>
         </div>
       )
     } else {
-      return ("Sorry, so called " + countryName + " country is not in earth. Search in your own planet");
+      return ("Sorry, so called " + props.match.params.countries + " country is not in earth. Search in your own planet");
     }
   }
 
@@ -67,7 +41,7 @@ const Homepage = props => {
     <div>
       <h1>{props.isLoading ? "Please wait" : null}</h1>
       {
-        props.isSuccessful ? showCountry(props.match.params.country ?? "Nepal") : null
+        props.isSuccessful ? showCountries() : null
       }
     </div>
   );
