@@ -1,11 +1,11 @@
 import axios from 'axios';
-import {dataUrl } from './apiLink';
+import { baseUrl } from './apiLink';
 
 export const api = axios.create({
-    dataUrl,
-    timeout: 60000,
-    headers: {
-      'Access-Control-Allow-Origin': '*',
-    },
-    crossDomain: true,
-  });
+  baseUrl,
+  timeout: 60000,
+  headers: {
+    'Access-Control-Allow-Origin': '*',
+  },
+  crossDomain: true,
+});

@@ -1,4 +1,8 @@
 //data related apis
-export const dataUrl = ''; //TODO :: add url here
-export const totalCountUrl = 'https://covidapi.yubarajpoudel.com/count'; //TODO :: add url here
-export const statsUrl = 'https://covidapi.yubarajpoudel.com/stat'; //TODO :: add url here
+export const baseUrl = "https://corona.lmao.ninja/v2/";
+export const countriesEndpoint = "countries/";
+export const historicalEndpoint = "historical/";
+
+
+// https://corona.lmao.ninja/v2/countries/India,Nepal 
+// https://corona.lmao.ninja/v2/historical/India,China?lastdays=30
