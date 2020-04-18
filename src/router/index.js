@@ -3,7 +3,7 @@ import { Router } from 'react-router';
 import { Switch } from 'react-router-dom';
 import history from './history';
 import { PublicRoute } from './routes';
-import Homepage from '../containers/homepage';
+import Homepage from '../containers/pages/homepage';
 
 
 function PublicRouter() {
